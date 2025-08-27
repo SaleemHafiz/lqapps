@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 import "./index.css";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
-import Game1 from "./components/Game1";
-import Game2 from "./components/Game2";
-import Game3 from "./components/Game3";
+import Plans from "./components/Plans/Plans";
+import DailySunnahs from "./components/DailySunnahs/DailySunnahs";
+import Duas from "./components/Duas/Duas";
 import ManageStudents from "./components/ManageStudents";
+import Quiz from "./components/quiz/Quiz";
 
 export default function App() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(true);
   const [activePage, setActivePage] = useState("home");
+  const [selectedStudent, setSelectedStudent] = useState(localStorage.getItem("selectedStudent") || "")
 
   const openSidebar = () => setOpen(true);
   const closeSidebar = () => setOpen(false);
@@ -24,9 +26,10 @@ export default function App() {
 
   let PageComponent;
   switch (activePage) {
-    case "game1": PageComponent = <Game1 />; break;
-    case "game2": PageComponent = <Game2 />; break;
-    case "game3": PageComponent = <Game3 />; break;
+    case "quiz": PageComponent = <Quiz />; break;
+    case "plans": PageComponent = <Plans />; break;
+    case "sunnahs": PageComponent = <DailySunnahs />; break;
+    case "duas": PageComponent = <Duas />; break;
     case "manage": PageComponent = <ManageStudents />; break;
     default: PageComponent = <Home />;
   }
@@ -50,6 +53,8 @@ export default function App() {
         setActivePage={setActivePage}
         dark={dark}
         toggleTheme={toggleTheme}
+        selectedStudent = {selectedStudent}
+        setSelectedStudent = {setSelectedStudent}
       />
 
       {open && <div className="overlay show" onClick={closeSidebar}></div>}

@@ -20,17 +20,37 @@
 }
 
 /* Base */
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; }
-body {
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   overflow-x: hidden;
-}
-.theme-dark, .theme-light {
   background: var(--bg);
   color: var(--txt);
+}
+
+.theme-dark, .theme-light {
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--txt);
+}
+
+main {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  padding-left: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Hamburger */
@@ -49,19 +69,24 @@ body {
   cursor: pointer;
   z-index: 1001;
 }
+
 .hamburger span {
   display: block;
   height: 4px;
   border-radius: 2px;
   background: var(--txt);
 }
+
 .hamburger.inside {
   position: absolute;
   top: 16px;
   right: 16px;
   left: auto;
 }
-.hamburger.inside span { background: #fff; }
+
+.hamburger.inside span {
+  background: #fff;
+}
 
 /* Sidebar */
 .sidebar {
@@ -77,7 +102,10 @@ body {
   flex-direction: column;
   z-index: 1000;
 }
-.sidebar.open { left: 0; }
+
+.sidebar.open {
+  left: 0;
+}
 
 /* Links */
 .links {
@@ -85,6 +113,7 @@ body {
   margin-top: 72px;
   padding: 12px;
 }
+
 .link-card {
   display: block;
   background: var(--card);
@@ -95,6 +124,7 @@ body {
   color: inherit;
   transition: background 0.2s, transform 0.2s;
 }
+
 .link-card:hover {
   background: var(--cardHover);
   transform: translateX(4px);
@@ -113,8 +143,14 @@ body {
   font-weight: 600;
   transition: background 0.2s, transform 0.1s;
 }
-.manage-btn:hover { background: var(--accentHover); }
-.manage-btn:active { transform: translateY(1px); }
+
+.manage-btn:hover {
+  background: var(--accentHover);
+}
+
+.manage-btn:active {
+  transform: translateY(1px);
+}
 
 /* Theme switch button */
 .theme-btn {
@@ -128,6 +164,7 @@ body {
   font-weight: 600;
   transition: background 0.2s, color 0.2s;
 }
+
 .theme-btn:hover {
   background: var(--accent);
   color: #fff;
@@ -143,6 +180,7 @@ body {
   transition: opacity 0.3s ease;
   z-index: 500;
 }
+
 .overlay.show {
   opacity: 1;
   visibility: visible;
@@ -150,18 +188,122 @@ body {
 
 /* Home */
 .home {
-  min-height: 100vh;
+  min-height: calc(100vh - 0px);
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 24px;
+  padding: 0;
 }
+
 .home .logo {
   width: 200px;
   max-width: 50vw;
   margin-bottom: 18px;
 }
+
 .home .subtitle {
   font-size: 22px;
   font-weight: 500;
 }
+
+/* =========================
+   Manage Students Styles
+   ========================= */
+
+.manage-students {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.manage-students h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.manage-students .student-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manage-students .student-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.manage-students .student-row:hover {
+  background: var(--cardHover);
+}
+
+.manage-students .student-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  outline: none;
+  font-size: 1rem;
+  background: var(--card);
+  color: var(--txt);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manage-students .student-row input:focus {
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.manage-students .student-row input::placeholder {
+  color: #94a3b8;
+}
+
+.manage-students .remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--accent);
+}
+
+.manage-students .remove-btn:hover {
+  transform: scale(1.2);
+  color: var(--accentHover);
+}
+
+/* Student Select in Sidebar */
+.sidebar .student-select {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: var(--card);
+  color: var(--txt);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.sidebar .student-select:hover {
+  background: var(--cardHover);
+}
+
+.sidebar .student-select:focus {
+  outline: none;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
